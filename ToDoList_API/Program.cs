@@ -1,6 +1,15 @@
+using ToDoList_DataAccessLayer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Register configuration manager
+var configuration = builder.Configuration;
+
+// Services
+builder.Services.AddSingleton<IConfiguration>(configuration);
+builder.Services.AddSingleton<DatabaseConnectionService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
