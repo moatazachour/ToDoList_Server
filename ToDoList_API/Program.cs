@@ -1,4 +1,6 @@
+using ToDoList_BusinessLayer;
 using ToDoList_DataAccessLayer;
+using ToDoList_DataAccessLayer.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ var configuration = builder.Configuration;
 // Services
 builder.Services.AddSingleton<IConfiguration>(configuration);
 builder.Services.AddSingleton<DatabaseConnectionService>();
+
+builder.Services.AddScoped<IUserData, clsUserData>();
+builder.Services.AddScoped<clsUser>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
