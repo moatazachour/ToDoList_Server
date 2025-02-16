@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoList_DataAccessLayer.DTO
+namespace ToDoList_DataAccessLayer.DTO.User
 {
     public class UserDTO
     {

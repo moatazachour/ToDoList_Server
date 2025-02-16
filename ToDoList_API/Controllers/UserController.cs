@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList_BusinessLayer;
-using ToDoList_DataAccessLayer.DTO;
+using ToDoList_DataAccessLayer.DTO.User;
 
 namespace ToDoList_API.Controllers
 {

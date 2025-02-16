@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
-using ToDoList_DataAccessLayer.DTO;
+using ToDoList_DataAccessLayer.DTO.User;
+using ToDoList_DataAccessLayer.Interfaces;
 
 namespace ToDoList_DataAccessLayer
 {

@@ -1,5 +1,5 @@
-﻿using ToDoList_DataAccessLayer;
-using ToDoList_DataAccessLayer.DTO;
+﻿using ToDoList_DataAccessLayer.DTO.User;
+using ToDoList_DataAccessLayer.Interfaces;
 
 namespace ToDoList_BusinessLayer
 {
