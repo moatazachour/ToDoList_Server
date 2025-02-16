@@ -18,6 +18,15 @@ namespace ToDoList_BusinessLayer
             }
         }
 
+        public UserLoginDTO UserLoginDTO
+        {
+            get
+            {
+                return new UserLoginDTO(this.UserName, this.Password);
+            }
+        }
+
+
         public int UserID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -92,6 +101,11 @@ namespace ToDoList_BusinessLayer
         public bool DeleteUser(int userID)
         {
             return _userData.DeleteUser(userID);
+        }
+
+        public int Login(UserLoginDTO userLoginDTO)
+        {
+            return _userData.ChkUsernameAndPassword(userLoginDTO);
         }
     }
 }

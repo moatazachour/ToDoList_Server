@@ -8,6 +8,8 @@ namespace ToDoList_DataAccessLayer.Interfaces
 
         int AddNewUser(UserDTO userDTO);
 
+        int ChkUsernameAndPassword(UserLoginDTO userLoginDTO);
+
         bool UpdateUser(int userID, UserDTO userDTO);
 
         bool DeleteUser(int userID);

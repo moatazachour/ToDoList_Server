@@ -93,6 +93,45 @@ namespace ToDoList_DataAccessLayer
             }
         }
 
+        public int ChkUsernameAndPassword(UserLoginDTO userLoginDTO)
+        {
+            int userID = -1;
+
+            try
+            {
+                using (SqlConnection connection = _dbConnectionService.GetConnection())
+                using (SqlCommand cmd = new SqlCommand("User_ChkUsernameAndPassword", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Username", userLoginDTO.UserName);
+                    cmd.Parameters.AddWithValue ("@Password", userLoginDTO.Password);
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            userID = (int)reader["UserID"];
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Database Error: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected Error: {ex.Message}");
+                throw;
+            }
+
+            return userID;
+        }
+
         public bool UpdateUser(int userID, UserDTO userDTO)
         {
             int rowsAffected = 0;

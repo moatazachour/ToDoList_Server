@@ -36,12 +36,12 @@ namespace ToDoList_API.Controllers
             return Ok(user.UserDTO);
         }
 
-        [HttpPost(Name = "AddUser")]
+        [HttpPost("Signup", Name = "AddUser")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<UserDTO> AddUser(UserDTO userDTO)
-        { 
+        {
             // Plan to check the username or the password if they already used
 
             if (userDTO == null || string.IsNullOrEmpty(userDTO.UserName) || string.IsNullOrEmpty(userDTO.Password) ||
@@ -57,8 +57,32 @@ namespace ToDoList_API.Controllers
                 userDTO.UserID = _user.UserID;
                 return CreatedAtRoute("GetUserByID", new { id = userDTO.UserID }, userDTO);
             }
-            
+
             return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPost("Login", Name = "Login")]
+        public ActionResult<UserDTO> Login(UserLoginDTO userLoginDTO)
+        {
+            if (string.IsNullOrEmpty(userLoginDTO.UserName) || string.IsNullOrEmpty(userLoginDTO.Password))
+            {
+                return BadRequest("Invalid User Data");
+            }
+
+            int userID = _user.Login(userLoginDTO);
+
+            if (userID == -1)
+            {
+                return NotFound("Username/Password not found!");
+            }
+
+            clsUser? user = _user.Find(userID);
+            //if (user != null)
+            //{
+            //    return Ok(user.UserDTO);
+            //}
+            return Ok(user.UserDTO);
+            // return Ok(userID);
         }
 
         [HttpPut("{id}", Name = "UpdateUser")]
@@ -68,7 +92,7 @@ namespace ToDoList_API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<UserDTO> UpdateUser(int id, UserDTO updatedUser)
         {
-            if (id < 1 || updatedUser == null || string.IsNullOrEmpty(updatedUser.UserName) || 
+            if (id < 1 || updatedUser == null || string.IsNullOrEmpty(updatedUser.UserName) ||
                 string.IsNullOrEmpty(updatedUser.Password) || string.IsNullOrEmpty(updatedUser.Email))
             {
                 return BadRequest("Invalid User Data");
