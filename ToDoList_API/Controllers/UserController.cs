@@ -39,7 +39,7 @@ namespace ToDoList_API.Controllers
         [HttpPost("Signup", Name = "AddUser")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public ActionResult<UserDTO> AddUser(UserDTO userDTO)
         {
             // Plan to check the username or the password if they already used
@@ -52,13 +52,13 @@ namespace ToDoList_API.Controllers
 
             _user.Initialize(userDTO);
 
-            if (_user.Save())
+            if (!_user.Save())
             {
-                userDTO.UserID = _user.UserID;
-                return CreatedAtRoute("GetUserByID", new { id = userDTO.UserID }, userDTO);
+                return Conflict("Username or Email already exists");
             }
 
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            userDTO.UserID = _user.UserID;
+            return CreatedAtRoute("GetUserByID", new { id = userDTO.UserID }, userDTO);
         }
 
         [HttpPost("Login", Name = "Login")]

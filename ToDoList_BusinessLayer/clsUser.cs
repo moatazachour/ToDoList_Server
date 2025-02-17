@@ -68,7 +68,10 @@ namespace ToDoList_BusinessLayer
         {
             this.UserID = _userData.AddNewUser(this.UserDTO);
 
-            return (this.UserID != -1);
+            if (this.UserID == -1) 
+                return false;
+
+            return true;
         }
 
         private bool _UpdateUser()
