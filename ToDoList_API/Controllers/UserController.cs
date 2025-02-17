@@ -125,6 +125,8 @@ namespace ToDoList_API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult DeleteUser(int id)
         {
+            // Test git pull/push
+
             if (id < 1)
             {
                 return BadRequest($"Not accepted ID {id}");
