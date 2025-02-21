@@ -3,7 +3,7 @@ using System.Data;
 using ToDoList_DataAccessLayer.DTO.Task;
 using ToDoList_DataAccessLayer.Interfaces;
 
-namespace ToDoList_DataAccessLayer
+namespace ToDoList_DataAccessLayer.DataAccessClasses
 {
     public class clsTaskData : ITask
     {
@@ -414,12 +414,12 @@ namespace ToDoList_DataAccessLayer
 
                     cmd.Parameters.AddWithValue("@TaskID", taskID);
                     cmd.Parameters.AddWithValue("@Title", updateTaskDTO.Title);
-                    
+
                     if (updateTaskDTO.Description == string.Empty)
                         cmd.Parameters.AddWithValue("@Description", DBNull.Value);
                     else
                         cmd.Parameters.AddWithValue("@Description", updateTaskDTO.Description);
-                    
+
                     cmd.Parameters.AddWithValue("@DueDate", updateTaskDTO.DueDate);
                     cmd.Parameters.AddWithValue("@IsImportant", updateTaskDTO.IsImportant);
                     cmd.Parameters.AddWithValue("@StatusID", updateTaskDTO.TaskID);

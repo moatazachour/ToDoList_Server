@@ -3,7 +3,7 @@ using System.Data;
 using ToDoList_DataAccessLayer.DTO.User;
 using ToDoList_DataAccessLayer.Interfaces;
 
-namespace ToDoList_DataAccessLayer
+namespace ToDoList_DataAccessLayer.DataAccessClasses
 {
     public class clsUserData : IUserData
     {
@@ -105,7 +105,7 @@ namespace ToDoList_DataAccessLayer
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@Username", userLoginDTO.UserName);
-                    cmd.Parameters.AddWithValue ("@Password", userLoginDTO.Password);
+                    cmd.Parameters.AddWithValue("@Password", userLoginDTO.Password);
 
                     connection.Open();
 
