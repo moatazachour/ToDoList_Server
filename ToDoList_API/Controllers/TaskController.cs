@@ -17,11 +17,11 @@ namespace ToDoList_API.Controllers
         }
 
 
-        [HttpGet("{id}", Name = "GetTaskByID")]
+        [HttpGet("{id:int}", Name = "GetTaskByID")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<TaskDetailsDTO> GetTaskByID(int id)
+        public ActionResult<TaskDetailsDTO> GetTaskByID([FromRoute] int id)
         {
             if (id < 1)
             {

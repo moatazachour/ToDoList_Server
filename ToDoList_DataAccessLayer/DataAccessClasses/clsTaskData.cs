@@ -422,7 +422,7 @@ namespace ToDoList_DataAccessLayer.DataAccessClasses
 
                     cmd.Parameters.AddWithValue("@DueDate", updateTaskDTO.DueDate);
                     cmd.Parameters.AddWithValue("@IsImportant", updateTaskDTO.IsImportant);
-                    cmd.Parameters.AddWithValue("@StatusID", updateTaskDTO.TaskID);
+                    cmd.Parameters.AddWithValue("@StatusID", updateTaskDTO.StatusID);
 
                     connection.Open();
                     rowsAffected = cmd.ExecuteNonQuery();
