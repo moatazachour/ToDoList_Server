@@ -6,7 +6,7 @@ namespace ToDoList_DataAccessLayer.Interfaces
     {
         UserDTO? GetUserByID(int userID);
 
-        int AddNewUser(UserDTO userDTO);
+        int AddNewUser(UserSignUpDTO userDTO);
 
         int ChkUsernameAndPassword(UserLoginDTO userLoginDTO);
 

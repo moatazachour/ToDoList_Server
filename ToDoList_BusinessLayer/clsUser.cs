@@ -18,6 +18,14 @@ namespace ToDoList_BusinessLayer
             }
         }
 
+        public UserSignUpDTO UserSignUpDTO
+        {
+            get
+            {
+                return new UserSignUpDTO(this.UserName, this.Password, this.Email);
+            }
+        }
+
         public UserLoginDTO UserLoginDTO
         {
             get
@@ -51,6 +59,16 @@ namespace ToDoList_BusinessLayer
             Mode = mode;
         }
 
+        public void Initialize(UserSignUpDTO userDTO, enMode mode = enMode.AddNew)
+        {
+            UserID = -1;
+            UserName = userDTO.UserName;
+            Password = userDTO.Password;
+            Email = userDTO.Email;
+
+            Mode = mode;
+        }
+
         public clsUser? Find(int userID)
         {
             UserDTO? userDTO = _userData.GetUserByID(userID);
@@ -66,7 +84,7 @@ namespace ToDoList_BusinessLayer
 
         private bool _AddNewUser()
         {
-            this.UserID = _userData.AddNewUser(this.UserDTO);
+            this.UserID = _userData.AddNewUser(this.UserSignUpDTO);
 
             if (this.UserID == -1) 
                 return false;

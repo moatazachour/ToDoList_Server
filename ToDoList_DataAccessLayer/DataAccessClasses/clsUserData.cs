@@ -56,7 +56,7 @@ namespace ToDoList_DataAccessLayer.DataAccessClasses
             }
         }
 
-        public int AddNewUser(UserDTO userDTO)
+        public int AddNewUser(UserSignUpDTO userDTO)
         {
             try
             {

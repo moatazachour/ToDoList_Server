@@ -1,7 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[User_Delete]  
+﻿ALTER PROCEDURE [dbo].[User_Delete]  
     @UserID INT  
 AS  
-BEGIN  
+BEGIN
+
+    DELETE FROM Tasks
+    WHERE UserID = @UserID;
+
     DELETE FROM Users  
     WHERE UserID = @UserID;  
 END;
