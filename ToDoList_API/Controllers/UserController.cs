@@ -40,24 +40,24 @@ namespace ToDoList_API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public ActionResult<UserDTO> AddUser(UserSignUpDTO userDTO)
+        public ActionResult<UserDTO> AddUser(UserSignUpDTO userSignupDTO)
         {
             // Plan to check the username or the password if they already used
 
-            if (string.IsNullOrEmpty(userDTO.UserName) || string.IsNullOrEmpty(userDTO.Password) ||
-                string.IsNullOrEmpty(userDTO.Email))
+            if (string.IsNullOrEmpty(userSignupDTO.UserName) || string.IsNullOrEmpty(userSignupDTO.Password) ||
+                string.IsNullOrEmpty(userSignupDTO.Email))
             {
                 return BadRequest("Invalid User Data");
             }
 
-            _user.Initialize(userDTO);
+            _user.Initialize(userSignupDTO);
 
             if (!_user.Save())
             {
                 return Conflict("Username or Email already exists");
             }
 
-            //userDTO.UserID = _user.UserID;
+            UserDTO userDTO = new UserDTO(_user.UserID, _user.UserName, _user.Password, _user.Email);
             return CreatedAtRoute("GetUserByID", new { id = _user.UserID }, userDTO);
         }
 
